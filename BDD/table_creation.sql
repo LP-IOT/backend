@@ -1,0 +1,115 @@
+ALTER SESSION SET NLS_DATE_FORMAT = 'dd/mm/yyyy';
+
+CREATE TABLE VAGUES(
+   NumVag INT,
+   DateVag DATE,
+   DebVag TIME,
+   FinVag TIME,
+   PRIMARY KEY(NumVag)
+);
+
+CREATE TABLE UFR(
+   NumUFR INT,
+   NomUFR VARCHAR(50),
+   PRIMARY KEY(NumUFR)
+);
+
+CREATE TABLE GROUPES_DE_TD(
+   N_Groupe INT,
+   PRIMARY KEY(N_Groupe)
+);
+
+CREATE TABLE EPREUVES(
+   NomEpreuve VARCHAR(50),
+   DateEpreuve DATE,
+   PRIMARY KEY(NomEpreuve)
+);
+
+CREATE TABLE CORRECTEURS(
+   PseudoCorrec VARCHAR(50),
+   PRIMARY KEY(PseudoCorrec)
+);
+
+CREATE TABLE SALLES(
+   DesigSalle VARCHAR(50),
+   CapOrdi INT,
+   EmplacSalle VARCHAR(50),
+   PRIMARY KEY(DesigSalle)
+);
+
+CREATE TABLE DOMAINES(
+   NumDom INT,
+   NomDom VARCHAR(50),
+   PRIMARY KEY(NumDom)
+);
+
+CREATE TABLE ETUDIANTS(
+   NumEtud INT,
+   NomEtud VARCHAR(50),
+   PrénEtud VARCHAR(50),
+   NomEpreuve VARCHAR(50) NOT NULL,
+   N_Groupe INT NOT NULL,
+   NumUFR INT NOT NULL,
+   NumVag INT NOT NULL,
+   PRIMARY KEY(NumEtud),
+   FOREIGN KEY(NomEpreuve) REFERENCES EPREUVES(NomEpreuve),
+   FOREIGN KEY(N_Groupe) REFERENCES GROUPES_DE_TD(N_Groupe),
+   FOREIGN KEY(NumUFR) REFERENCES UFR(NumUFR),
+   FOREIGN KEY(NumVag) REFERENCES VAGUES(NumVag)
+);
+
+CREATE TABLE LOTS(
+   N_Lot INT,
+   PseudoCorrec VARCHAR(50) NOT NULL,
+   PRIMARY KEY(N_Lot),
+   FOREIGN KEY(PseudoCorrec) REFERENCES CORRECTEURS(PseudoCorrec)
+);
+
+CREATE TABLE SOUS_DOMAINES(
+   NomSousDom VARCHAR(50),
+   NumDom INT NOT NULL,
+   PRIMARY KEY(NomSousDom),
+   FOREIGN KEY(NumDom) REFERENCES DOMAINES(NumDom)
+);
+
+CREATE TABLE COPIES(
+   NumCopie INT,
+   NoteCopie REAL,
+   NumEtud INT NOT NULL,
+   NomSousDom VARCHAR(50) NOT NULL,
+   NumDom INT NOT NULL,
+   N_Lot INT NOT NULL,
+   PRIMARY KEY(NumCopie),
+   FOREIGN KEY(NumEtud) REFERENCES ETUDIANTS(NumEtud),
+   FOREIGN KEY(NomSousDom) REFERENCES SOUS_DOMAINES(NomSousDom),
+   FOREIGN KEY(NumDom) REFERENCES DOMAINES(NumDom),
+   FOREIGN KEY(N_Lot) REFERENCES LOTS(N_Lot)
+);
+
+CREATE TABLE A_Lieu(
+   N_Lot INT,
+   DesigSalle VARCHAR(50),
+   PRIMARY KEY(N_Lot, DesigSalle),
+   FOREIGN KEY(N_Lot) REFERENCES LOTS(N_Lot),
+   FOREIGN KEY(DesigSalle) REFERENCES SALLES(DesigSalle)
+);
+
+CREATE TABLE Contient(
+   NomEpreuve VARCHAR(50),
+   NumCopie INT,
+   PRIMARY KEY(NomEpreuve, NumCopie),
+   FOREIGN KEY(NomEpreuve) REFERENCES EPREUVES(NomEpreuve),
+   FOREIGN KEY(NumCopie) REFERENCES COPIES(NumCopie)
+);
+
+CREATE TABLE Admission(
+   NumEtud INT,
+   NumDom INT,
+   ResQuali VARCHAR(50),
+   DateCapitalisation DATE,
+   ResQuanti INT,
+   NoteCopie INT,
+   PRIMARY KEY(NumEtud, NumDom),
+   FOREIGN KEY(NumEtud) REFERENCES ETUDIANTS(NumEtud),
+   FOREIGN KEY(NumDom) REFERENCES DOMAINES(NumDom)
+);
