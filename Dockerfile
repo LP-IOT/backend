@@ -11,8 +11,7 @@ ADD . /backend/
 WORKDIR /backend
 
 # On installe les lib et on construit l'application
-RUN npm install --production
-RUN npm run build 
+RUN npm install --production && npm run build 
 
 # On dit à notre boîte qu'on ouvre un chemin vers notre api via le port 3000
 EXPOSE 3000
