@@ -7,4 +7,5 @@ export class Note extends BaseFieldEntity {
   @Column('number', { nullable: false })
   montant: number;
 
+  
 }
