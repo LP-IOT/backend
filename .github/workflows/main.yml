@@ -1,0 +1,40 @@
+name: Build and deploy api
+on:
+  push:
+    branches:
+      - david
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.16.x]
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Cache node modules
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - name: Node ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+   
+      - name : push to staging server with ssh
+        env :
+            SSHPASS : ${{ secrets.SSHPASS }}
+            SERVER : ${{ secrets.SERVER}}
+        run : |
+            sudo apt-get update 
+            sudo apt-get install sshpass -y
+            npm ci --debug
+            npm run build --prod
+            cd dist/
+            sudo sshpass  -p ${SSHPASS}   -v  ssh -o StrictHostKeyChecking=no root@${SERVER} 'rm -rf /home/deploy/lpiot/api/*'
+            sudo sshpass -p ${SSHPASS} scp -v  -o stricthostkeychecking=no -r *.* root@${SERVER}:/home/deploy/lpiot/api/*'
+            sudo sshpass  -p ${SSHPASS}   -v  ssh -o StrictHostKeyChecking=no root@${SERVER} 'systemctl restart api.service'
