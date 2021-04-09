@@ -15,8 +15,8 @@ jobs:
       with:
         host: ${{ secrets.SSH_HOST }}
         username: ${{ secrets.SSH_USERNAME }}
-        key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDsjdEPA4lJzPXNSg6F/EESRPxz8lUaB2KqlmDo24T/aA8ztDnc0bHY42/ZekxCRjiXn16p4Y4mRfBjtu9u9afotApMXLbxeWUi1EKHSdQj0cRnk4zpTXnALAdqVF/96E66zuHDNL5HDuEhjsiITzI5LSoa0J90fjiHumsj1NghWT5zDprbh79d5VSiOtiK0hBMxPvaQaZUtstvsVgxFKjtVGCmMtxsjfLcNDzH69hkp+Y7z+NI6b4xHABgHcR7yx/v3mKS+V8zKEPC/ZPt/X0t+HNKlDmmCxfpVUxIDpGpkdGhqs5Tw8TOi3vjMkWmKl/Qk/qXEVagSAs6aKZj2/OcZoRMVbUaufZ6UOz3h0MF7uqwXOdfWAWv+zQVJm3kIhY4L7FaWQ3Gi/fdjiI3u8YuTcDJE8X4uCUzhGhqxxsOwcpF71TPUu+mTJPXP9qTcrZ+uvc7pz4+Fa+sJhwEp3ykd2CPOwbMbDkTwbAzM/StPz3KHIYROUcseGNHd4vv6IRyUoVrq0oe0rJrS3tXm0GQJhxIu9E2g+FWb0Y1hH/GoVefBaQ3rUaXPplrUFHlRjnWMSzvPQeOlUXVO2Ra9XxFuI3tL6XNEGUoDWmn0Q9JsrMHYmO5ho4CnmOE73CYJYSkf0BF7CpHIS99BaFty02E2IYGxCkt71s34S2xxEwlsQ== adrian.paul.carrieres@gmail.com
-        port: 22
+        password: ${{ secrets.SSH_PASSWORD }}
+        port: ${{ secrets.SSH_PORT}}
         script: |
           cd /home/deploy/lpiot/backend
           git pull origin david
