@@ -39,6 +39,8 @@ values (1, 4.5, 65402, NULL, 1, 'ABCD');
 INSERT INTO COPIES (NumCopie, NoteCopie, NumEtud, NomSousDom, NumDom,N_Lot)
 values (2, 2.0, 65404, NULL, 1, 'ABCD');
 
+INSERT INTO BARRE (Annee, NoteSeuil) values (2021, 4.0);
+
 INSERT INTO A_Lieu (N_Lot, DesigSalle) values ('ABCD', 'B0-13');
 
 INSERT INTO Contient (NomEpreuve, NumCopie) values ("C2I - U-Paris - 2021", 1);
