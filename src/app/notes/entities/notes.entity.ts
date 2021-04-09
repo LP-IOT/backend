@@ -4,7 +4,7 @@ import { BaseFieldEntity } from '../../utils/baseEntity.entity';
 @Entity()
 export class Note extends BaseFieldEntity {
 
-  @Column('number', { nullable: false })
+  @Column('integer', { nullable: false })
   montant: number;
 
   
