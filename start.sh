@@ -1,3 +1,3 @@
-npm i --production
-npm run build --production
+npm i
+npm run build
 pm2 restart backend
