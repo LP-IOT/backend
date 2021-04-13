@@ -8,7 +8,7 @@ global['fetch'] = require('node-fetch');
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.setGlobalPrefix('api');
-  
+
   const config = new DocumentBuilder()
     .setTitle('CDI Rest API')
     .setDescription('Here are the link to the Rest API')
@@ -19,7 +19,7 @@ async function bootstrap() {
   SwaggerModule.setup('api', app, document);
 
   app.enableCors({
-    origin: false,
+    origin: 'http://localhost:4200',
     credentials: false,
   });
 
