@@ -4,8 +4,9 @@ import { Etudiant } from './app/etudiant/entities/etudiant.entity';
 import { EtudiantService } from './app/etudiant/etudiant.service';
 import { Lot } from './app/lot/entities/lot.entity';
 import { LotService } from './app/lot/lot.service';
-import { CreateSalleDTO } from './app/salle/dto/salle.dto';
+import { CreateSalleDTO } from './app/dto/salle.dto';
 import { SalleService } from './app/salle/salle.service';
+import { CreateLotDTO } from './app/dto/lot.dto';
 
 @Controller()
 export class AppController {
@@ -39,5 +40,10 @@ export class AppController {
   @Get('lot')
   async getAllLot(): Promise<Lot[]> {
     return await this.lotService.getAllLot();
+  }
+
+  @Post('lot')
+  async createLot(input: CreateLotDTO): Promise<Boolean> {
+    return await this.lotService.createLot(input.numLot);
   }
 }

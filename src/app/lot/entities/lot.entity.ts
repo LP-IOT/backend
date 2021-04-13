@@ -1,13 +1,15 @@
 import { Copie } from 'src/app/copies/entities/copie.entity';
 import { Correcteur } from 'src/app/correcteur/entities/correcteur.entity';
 import { Salle } from 'src/app/salle/entities/salle.entity';
-import { Entity, ManyToOne } from 'typeorm';
+import { Column, Entity, ManyToOne } from 'typeorm';
 import { BaseFieldEntity } from '../../utils/baseEntity.entity';
 
 @Entity()
 export class Lot extends BaseFieldEntity {
 
-
+  @Column('integer', {nullable: false})
+  numLot: number;
+  
   @ManyToOne(
     () => Correcteur,
     correcteur => correcteur.id,
