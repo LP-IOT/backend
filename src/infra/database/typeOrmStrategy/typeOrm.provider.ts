@@ -14,3 +14,4 @@ export const typeOrmStrategyFactory = (configService: ConfigService) =>
     synchronize: true,
     charset: 'utf8mb4',
   } as TypeOrmModuleOptions);
+
