@@ -17,6 +17,9 @@ export class SalleService {
     return await this.salleRepository.findOne({ id });
   }
 
+  async findAll() {
+    return await this.salleRepository.find();
+  }
 
   async createSalle(designation: string, emplacement: string, capaciteOrdinateur: number, lotId: number) {
     try {

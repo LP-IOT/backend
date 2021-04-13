@@ -15,7 +15,7 @@ export class LotService {
     return await this.lotRepository.findOne({ id });
   }
 
-  async getAllLot(): Promise<Lot[]> {
+  async findAll(): Promise<Lot[]> {
     return await this.lotRepository.find();
   }
 

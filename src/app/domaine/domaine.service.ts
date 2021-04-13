@@ -14,4 +14,7 @@ export class DomaineService {
   async findOne(id: number) {
     return await this.domaineRepository.findOne({ id });
   }
+  async findAll() {
+    return await this.domaineRepository.find();
+  }
 }

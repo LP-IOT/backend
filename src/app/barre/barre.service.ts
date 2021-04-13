@@ -15,4 +15,7 @@ export class BarreService {
   async findOne(id: number) {
     return await this.barreRepository.findOne({ id });
   }
+  async findAll() {
+    return await this.barreRepository.find();
+  }
 }

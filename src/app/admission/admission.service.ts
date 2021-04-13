@@ -15,4 +15,7 @@ export class AdmissionService {
   async findOne(id: number) {
     return await this.admissionRepository.findOne({ id });
   }
+  async findAll() {
+    return await this.admissionRepository.find();
+  }
 }

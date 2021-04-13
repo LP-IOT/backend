@@ -14,4 +14,7 @@ export class CorrecteurService {
   async findOne(id: number) {
     return await this.correcteurRepository.findOne({ id });
   }
+  async findAll() {
+    return await this.correcteurRepository.find();
+  }
 }
