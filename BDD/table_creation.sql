@@ -1,5 +1,3 @@
-SET time_zone = 'UTC';
-
 Drop table VAGUES cascade constraints purge;
 Drop table UFR CASCADE CONSTRAINTS purge;
 DROP TABLE GROUPES_DE_TD CASCADE CONSTRAINTS PURGE;
