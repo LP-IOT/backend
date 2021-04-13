@@ -1,4 +1,4 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { Inject, Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Lot } from '../lot/entities/lot.entity';
@@ -11,8 +11,8 @@ export class SalleService {
   constructor(
     @InjectRepository(Salle)
     private salleRepository: Repository<Salle>,
-    @InjectRepository(Lot)
-    private lotRepository: Repository<Lot>
+    @Inject(LotService)
+    private lotService
   ) {}
 
   async findOne(id: number) {
@@ -26,7 +26,7 @@ export class SalleService {
       s.designation = designation;
       s.capaciteOrdinateur = capaciteOrdinateur;
       s.emplacement = emplacement;
-      s.lot = await this.lotRepository.findOne({id: lotId});
+      s.lot = await this.lotService.findOne(lotId);
       s.save();
       return true;
     } catch (error) {
