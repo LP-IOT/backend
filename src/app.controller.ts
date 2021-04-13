@@ -1,4 +1,4 @@
-import { Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Logger, Post } from '@nestjs/common';
 import { AppService } from './app.service';
 import { Etudiant } from './app/etudiant/entities/etudiant.entity';
 import { EtudiantService } from './app/etudiant/etudiant.service';
@@ -31,8 +31,8 @@ export class AppController {
   /** Salle Service Endpoint */
 
   @Post('salle')
-  async createSalle(designation: string, emplacement: string, capaciteOrdinateur: number, lotId: number): Promise<Boolean> {
-    return await this.salleService.createSalle(designation, emplacement, capaciteOrdinateur, lotId);
+  async createSalle(@Body() input: CreateSalleDTO): Promise<Boolean> {
+    return await this.salleService.createSalle(input.designation, input.emplacement, input.capaciteOrdinateur, input.lotId);
   }
 
   /** Lot Service Endpoint */
@@ -43,7 +43,7 @@ export class AppController {
   }
 
   @Post('lot')
-  async createLot(numLot: string): Promise<Boolean> {
-    return await this.lotService.createLot(numLot);
+  async createLot(@Body() input: CreateLotDTO) {
+    return await this.lotService.createLot(input.numLot);
   }
 }
