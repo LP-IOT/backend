@@ -14,4 +14,8 @@ export class LotService {
   async findOne(id: number) {
     return await this.lotRepository.findOne({ id });
   }
+
+  async getAllLot() {
+    return await this.lotRepository.find();
+  }
 }

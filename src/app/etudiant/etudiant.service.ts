@@ -17,4 +17,15 @@ export class EtudiantService {
   async findAll() {
     return await this.etudiantRepository.find();
   }
+
+  async importEtudiant() {
+    const e = new Etudiant();
+    if(this.etudiantRepository.save(e)) {
+      return true;
+    }
+    else {
+      return false;
+    }
+
+  }
 }
