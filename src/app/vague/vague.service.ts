@@ -14,5 +14,8 @@ export class VagueService {
     return await this.vagueRepository.findOne({ id });
   }
 
+  async findAll() {
+    return await this.vagueRepository.find();
+  }
   
 }

@@ -13,4 +13,7 @@ export class UfrService {
   async findOne(id: number) {
     return await this.ufrRepository.findOne({ id });
   }
+  async findAll() {
+    return await this.ufrRepository.find();
+  }
 }

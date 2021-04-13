@@ -13,4 +13,7 @@ export class EpreuveService {
   async findOne(id: number) {
     return await this.epreuveRepository.findOne({ id });
   }
+  async findAll() {
+    return await this.epreuveRepository.find();
+  }
 }

@@ -14,4 +14,7 @@ export class CopieService {
   async findOne(id: number) {
     return await this.copieRepository.findOne({ id });
   }
+  async findAll() {
+    return await this.copieRepository.find();
+  }
 }

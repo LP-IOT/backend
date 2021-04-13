@@ -13,4 +13,7 @@ export class GroupeService {
   async findOne(id: number) {
     return await this.groupeRepository.findOne({ id });
   }
+  async findAll() {
+    return await this.groupeRepository.find();
+  }
 }
