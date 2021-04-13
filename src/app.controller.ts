@@ -31,8 +31,8 @@ export class AppController {
   /** Salle Service Endpoint */
 
   @Post('salle')
-  async createSalle(input: CreateSalleDTO): Promise<Boolean> {
-    return await this.salleService.createSalle(input.designation, input.emplacement, input.capaciteOrdinateur, input.lotId);
+  async createSalle(designation: string, emplacement: string, capaciteOrdinateur: number, lotId: number): Promise<Boolean> {
+    return await this.salleService.createSalle(designation, emplacement, capaciteOrdinateur, lotId);
   }
 
   /** Lot Service Endpoint */
@@ -43,7 +43,7 @@ export class AppController {
   }
 
   @Post('lot')
-  async createLot(input: CreateLotDTO): Promise<Boolean> {
-    return await this.lotService.createLot(input.numLot);
+  async createLot(numLot: string): Promise<Boolean> {
+    return await this.lotService.createLot(numLot);
   }
 }
