@@ -1,17 +1,21 @@
-import { Copie } from 'src/app/copies/entities/copie.entity';
+import { Domaine } from 'src/app/domaine/entities/domaine.entity';
 import { Etudiant } from 'src/app/etudiant/entities/etudiant.entity';
 import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 import { BaseFieldEntity } from '../../utils/baseEntity.entity';
 
 @Entity()
-export class Epreuve extends BaseFieldEntity {
+export class Admission extends BaseFieldEntity {
 
   
   @Column('text', { nullable: false })
-  nom: string;
-  @Column('integer', { nullable: false })
-  anneeEpreuve: number;
-  
+  resultatQualitatif: string;
+
+  @Column({nullable: false})
+  resultatQuantitatif: number;
+
+  @Column({nullable: false})
+  dateCapitalisation: Date;
+
   @OneToMany(
     () => Etudiant,
     etudiant => etudiant.id,
@@ -19,8 +23,11 @@ export class Epreuve extends BaseFieldEntity {
   etudiants: Etudiant[];
 
   @OneToMany(
-    () => Copie,
-    copie => copie.id,
+    () => Domaine,
+    domaine => domaine.id
   )
-  copies: Copie[];
+  domaines: Domaine[];
+
+
+  
 }

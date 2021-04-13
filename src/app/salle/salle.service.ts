@@ -1,16 +1,16 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Note } from './entities/notes.entity';
+import { Salle } from './entities/salle.entity';
 
 @Injectable()
-export class NoteService {
+export class SalleService {
   constructor(
-    @InjectRepository(Note)
-    private noteRepository: Repository<Note>,
+    @InjectRepository(Salle)
+    private salleRepository: Repository<Salle>,
   ) {}
 
   async findOne(id: number) {
-    return await this.noteRepository.findOne({ id });
+    return await this.salleRepository.findOne({ id });
   }
 }
