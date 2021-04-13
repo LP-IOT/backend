@@ -13,4 +13,8 @@ export class EtudiantService {
   async findOne(id: number) {
     return await this.etudiantRepository.findOne({ id });
   }
+
+  async findAll() {
+    return await this.etudiantRepository.find();
+  }
 }
