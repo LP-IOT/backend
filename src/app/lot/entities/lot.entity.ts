@@ -7,9 +7,9 @@ import { BaseFieldEntity } from '../../utils/baseEntity.entity';
 @Entity()
 export class Lot extends BaseFieldEntity {
 
-  @Column('integer', {nullable: false})
-  numLot: number;
-  
+  @Column('text', {nullable: false})
+  numLot: string;
+
   @ManyToOne(
     () => Correcteur,
     correcteur => correcteur.id,

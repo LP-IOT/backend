@@ -19,11 +19,11 @@ export class LotService {
     return await this.lotRepository.find();
   }
 
-  async createLot(numLot: number): Promise<Boolean> {
-    var l = new Lot();
-    l.numLot = numLot;
+  async createLot(numLot: string): Promise<Boolean> {
     try {
-      this.lotRepository.save(l);
+      var l = new Lot();
+      l.numLot = numLot;
+      this.lotRepository.save({...l});
       return true;
     } catch (error) {
       Logger.error(error);

@@ -13,5 +13,6 @@ export const typeOrmStrategyFactory = (configService: ConfigService) =>
     entities: [join(__dirname, '../../..', '/**/*.entity{.ts,.js}')],
     synchronize: true,
     charset: 'utf8mb4',
+    logging: true,
   } as TypeOrmModuleOptions);
 
