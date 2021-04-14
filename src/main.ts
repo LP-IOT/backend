@@ -19,7 +19,7 @@ async function bootstrap() {
   SwaggerModule.setup('api', app, document);
 
   app.enableCors({
-    origin: 'http://localhost:4200',
+    origin: 'http://adrianpaul-carrieres.fr:4200',
     credentials: false,
   });
 
