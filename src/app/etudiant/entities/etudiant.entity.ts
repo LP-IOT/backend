@@ -11,7 +11,8 @@ import { BaseFieldEntity } from '../../utils/baseEntity.entity';
 @Entity()
 export class Etudiant extends BaseFieldEntity {
 
-  
+  @Column('integer', {nullable: false})
+  idetudiant: number;
   @Column('text', { nullable: false })
   nom: string;
   @Column('text', { nullable: false })

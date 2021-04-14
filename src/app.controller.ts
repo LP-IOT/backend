@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Logger, Post } from '@nestjs/common';
+import { Body, Controller, Get, Logger, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { AppService } from './app.service';
 import { Etudiant } from './app/etudiant/entities/etudiant.entity';
 import { EtudiantService } from './app/etudiant/etudiant.service';
@@ -26,6 +26,8 @@ import { Correcteur } from './app/correcteur/entities/correcteur.entity';
 import { Copie } from './app/copies/entities/copie.entity';
 import { Barre } from './app/barre/entities/barre.entity';
 import { Admission } from './app/admission/entities/admission.entity';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { fileURLToPath } from 'node:url';
 
 @Controller()
 export class AppController {
@@ -46,8 +48,10 @@ export class AppController {
   }
 
   @Post('import/etudiant')
-  async importCSVEtudiant(): Promise<Boolean> {
-    return await this.etudiantService.importEtudiant();
+  @UseInterceptors(FileInterceptor('file'))
+  async importCSVEtudiant(@UploadedFile() file: Express.Multer.File) {
+    console.log(await this.etudiantService.importEtudiant(file));
+    //return await this.etudiantService.importEtudiant();
   }
 
   /** Salle Service Endpoint */
@@ -128,4 +132,6 @@ export class AppController {
   async getAllAdmission(): Promise<Admission[]> {
     return await this.admissionService.findAll();
   }
+
+
 }
