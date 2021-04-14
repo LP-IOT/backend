@@ -25,7 +25,7 @@ export class EtudiantService {
     try {
       var streamifier = require('streamifier/lib');
       const stream = streamifier.createReadStream(file.buffer);
-      var entities = await this.csvParser.parse(stream, Etudiant, 1, null, { strict: true, separator: ',' });
+      var entities = await this.csvParser.parse(stream, Etudiant, null, null, { strict: true, separator: ',' });
       this.etudiantRepository.save(entities.list);
       return true;
     } catch (error) {
