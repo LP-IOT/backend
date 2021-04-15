@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Correcteur } from './entities/correcteur.entity';
@@ -16,5 +16,16 @@ export class CorrecteurService {
   }
   async findAll() {
     return await this.correcteurRepository.find();
+  }
+  async createCorrecteur(pseudo: string): Promise<Boolean> {
+    try {
+      var c = new Correcteur();
+      c.pseudo = pseudo;
+      c.save();
+      return true;
+    } catch(error) {
+      Logger.error(error);
+    }
+    return false;
   }
 }

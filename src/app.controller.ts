@@ -28,6 +28,7 @@ import { Barre } from './app/barre/entities/barre.entity';
 import { Admission } from './app/admission/entities/admission.entity';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { fileURLToPath } from 'node:url';
+import { CreateCorrecteurDTO } from './app/dto/correcteur.dto';
 
 @Controller()
 export class AppController {
@@ -115,11 +116,21 @@ export class AppController {
     return await this.correcteurService.findAll();
   }
 
+  @Post('correcteur')
+  async createCorrecteur(@Body() input: CreateCorrecteurDTO): Promise<Boolean> {
+    return await this.correcteurService.createCorrecteur(input.pseudo);
+  }
+
   /** Correcteur Service Endpoint */
   @Get('copie')
   async getAllCopie(): Promise<Copie[]> {
     return await this.copieService.findAll();
   }
+
+  /**@Post('copie')
+  async createCopie(): Promise<Boolean[]> {
+    return await this.copieService.createCopie();
+  }*/
 
   /** Barre Service Endpoint */
   @Get('barre')
