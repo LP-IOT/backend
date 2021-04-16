@@ -1,6 +1,7 @@
 import { Inject, Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { In, Repository } from 'typeorm';
+import { AdmissionService } from '../admission/admission.service';
 import { DomaineService } from '../domaine/domaine.service';
 import { EpreuveService } from '../epreuve/epreuve.service';
 import { EtudiantService } from '../etudiant/etudiant.service';
@@ -14,13 +15,15 @@ export class CopieService {
     @InjectRepository(Copie)
     private copieRepository: Repository<Copie>,
     @Inject(EtudiantService)
-    private readonly etudiantService,
+    private readonly etudiantService: EtudiantService,
     @Inject(DomaineService)
-    private readonly domaineService,
+    private readonly domaineService: DomaineService,
     @Inject(LotService)
-    private readonly lotService,
+    private readonly lotService: LotService,
     @Inject(EpreuveService)
-    private readonly epreuveService
+    private readonly epreuveService: EpreuveService,
+    @Inject(AdmissionService)
+    private readonly admissionService: AdmissionService
   ) {}
 
   async findOne(id: number) {
@@ -37,6 +40,8 @@ export class CopieService {
       copie.domaine = await this.domaineService.findOne(idDomaine);
       copie.lot = await this.lotService.findOne(idLot);
       copie.epreuve = await this.epreuveService.findOne(idEpreuve);
+      this.admissionService.checkAdmission(copie);
+      this.copieRepository.save(copie);
       return true;
     } catch (error) {
       Logger.error(error);
