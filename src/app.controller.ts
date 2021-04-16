@@ -133,11 +133,11 @@ export class AppController {
     return await this.copieService.findAll();
   }
   @Post('copie')
-  async createCopie(@Body() input: CreateCopieDTO): Promise<Boolean> {
-    if(input.note > 5.0) {
+  async createCopie(@Body() c: Copie): Promise<Boolean> {
+    if(c.note > 5.0) {
       return false;
     }
-    return await this.copieService.createCopie(input.note, input.idEtu, input.idDomaine, input.idLot, input.idEpreuve);
+    return await this.copieService.createCopie(c);
   }
 
   /** Barre Service Endpoint */
