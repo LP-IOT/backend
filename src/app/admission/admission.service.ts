@@ -13,9 +13,7 @@ import { Admission } from './entities/admission.entity';
 export class AdmissionService {
   constructor(
     @InjectRepository(Admission)
-    private admissionRepository: Repository<Admission>,
-    @Inject(VagueService)
-    private vagueService: VagueService
+    private admissionRepository: Repository<Admission>
   ) {}
 
   async findOne(id: number) {
