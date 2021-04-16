@@ -30,7 +30,7 @@ export class EtudiantService {
   }
 
   async findOneByNumEtu(idEtu: number) {
-    return await this.etudiantRepository.createQueryBuilder("etudiant").where("etudiant.idetudiant = :idEtud").setParameters({idEtud: idEtu}).take(1).getOne();
+    return await this.etudiantRepository.findOne({where: {idetudiant:idEtu}});
   }
 
   async findAll() {
@@ -52,7 +52,7 @@ export class EtudiantService {
 
   async updateEtudiant(idEtu: number, idUfr: number, idEpreuve: number, idVague: number, idGroupe: number): Promise<Boolean> {
     try {
-      var e = await this.etudiantRepository.createQueryBuilder("etudiant").where("etudiant.idetudiant = :idEtud").setParameters({idEtud: idEtu}).take(1).getOne();
+      var e = await this.findOneByNumEtu(idEtu);
       e.epreuve = await this.epreuveService.findOne(idEpreuve);
       e.ufr = await this.ufrService.findOne(idUfr);
       e.vague = await this.vagueService.findOne(idVague);
