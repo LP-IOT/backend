@@ -32,10 +32,16 @@ export class CopieService {
   async findAll() {
     return await this.copieRepository.find();
   }
-  async createCopie(c: Copie): Promise<Boolean> {
+  async createCopie(note: number, idEtu: number, idDomaine: number, idLot: number, idEpreuve: number): Promise<Boolean> {
     try {
-      this.admissionService.checkAdmission(c);
-      this.copieRepository.save(c);
+      var copie = new Copie();
+      copie.note = note;
+      copie.etudiant = await this.etudiantService.findOne(idEtu);
+      copie.domaine = await this.domaineService.findOne(idDomaine);
+      copie.lot = await this.lotService.findOne(idLot);
+      copie.epreuve = await this.epreuveService.findOne(idEpreuve);
+      this.copieRepository.save(copie);
+      this.admissionService.checkAdmission(copie);
       return true;
     } catch (error) {
       Logger.error(error);
