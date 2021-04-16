@@ -75,7 +75,4 @@ export class AdmissionService {
     return false;
   }
 }
-function forwardRed(): any {
-  throw new Error('Function not implemented.');
-}
 
