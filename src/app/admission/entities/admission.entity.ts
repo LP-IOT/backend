@@ -22,12 +22,11 @@ export class Admission extends BaseFieldEntity {
   )
   etudiants: Etudiant[];
 
-  @OneToMany(
+  @ManyToOne(
     () => Domaine,
     domaine => domaine.id
   )
-  domaines: Domaine[];
+  domaines: Domaine;
 
 
-  
 }
