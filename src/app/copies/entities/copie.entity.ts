@@ -11,7 +11,6 @@ import { BaseFieldEntity } from '../../utils/baseEntity.entity';
 @Entity()
 export class Copie extends BaseFieldEntity {
 
-  
   @Column('integer', { nullable: false })
   note: number;
 
@@ -25,7 +24,7 @@ export class Copie extends BaseFieldEntity {
     () => Domaine,
     domaine => domaine.id
   )
-    domaine: Domaine;
+  domaine: Domaine;
 
   @ManyToOne(
     () => Lot,
@@ -38,6 +37,4 @@ export class Copie extends BaseFieldEntity {
     epreuve => epreuve.id
   )
   epreuve: Epreuve;
-
-  
 }
