@@ -33,6 +33,9 @@ export class EtudiantService {
     return await this.etudiantRepository.findOne({where: {idetudiant:idEtu}});
   }
 
+  async findEtudVag(id: number) {
+    return await this.etudiantRepository.findOne(id, {relations:['vague']});
+  }
   async findAll() {
     return await this.etudiantRepository.find();
   }

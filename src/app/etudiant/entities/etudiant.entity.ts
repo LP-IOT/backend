@@ -5,7 +5,7 @@ import { Epreuve } from 'src/app/epreuve/entities/epreuve.entity';
 import { Groupe } from 'src/app/groupe/entities/group.entity';
 import { Ufr } from 'src/app/ufr/entities/ufr.entity';
 import { Vague } from 'src/app/vague/entities/vague.entity';
-import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
 import { BaseFieldEntity } from '../../utils/baseEntity.entity';
 
 @Entity()
@@ -20,26 +20,30 @@ export class Etudiant extends BaseFieldEntity {
 
   @ManyToOne(
     () => Epreuve,
-    epreuve => epreuve.nom,
+    epreuve => epreuve.nom,{eager:false}
   )
+  @JoinColumn()
   epreuve: Epreuve;
 
   @ManyToOne(
     () => Groupe,
-    groupe => groupe.id
+    groupe => groupe.id,{eager:false}
   )
+  @JoinColumn()
     groupe: Groupe;
 
   @ManyToOne(
     () => Ufr,
-    ufr => ufr.id
+    ufr => ufr.id, {eager:false}
   )
+  @JoinColumn()
   ufr: Ufr;
 
   @ManyToOne(
     () => Vague,
-    vague => vague.id
+    vague => vague.id, {eager:false}
   )
+  @JoinColumn()
   vague: Vague;
 
   @OneToMany(

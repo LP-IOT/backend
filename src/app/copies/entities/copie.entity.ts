@@ -5,7 +5,7 @@ import { Groupe } from 'src/app/groupe/entities/group.entity';
 import { Lot } from 'src/app/lot/entities/lot.entity';
 import { Ufr } from 'src/app/ufr/entities/ufr.entity';
 import { Vague } from 'src/app/vague/entities/vague.entity';
-import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
 import { BaseFieldEntity } from '../../utils/baseEntity.entity';
 
 @Entity()
@@ -16,25 +16,29 @@ export class Copie extends BaseFieldEntity {
 
   @ManyToOne(
     () => Etudiant,
-    etudiant => etudiant.id,
+    etudiant => etudiant.idetudiant,  {eager: false}
   )
+  @JoinColumn()
   etudiant: Etudiant;
 
   @ManyToOne(
     () => Domaine,
-    domaine => domaine.id
+    domaine => domaine.id,  {eager: false}
   )
+  @JoinColumn()
   domaine: Domaine;
 
   @ManyToOne(
     () => Lot,
-    lot => lot.id
+    lot => lot.id, {eager: false}
   )
+  @JoinColumn()
   lot: Lot;
 
   @ManyToOne(
     () => Epreuve,
-    epreuve => epreuve.id
+    epreuve => epreuve.id, { eager: false }
   )
+  @JoinColumn()
   epreuve: Epreuve;
 }
