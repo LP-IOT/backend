@@ -33,6 +33,7 @@ export class AdmissionService {
       a.resultatQuantitatif = c.note;
       a.etudiants = c.etudiant;
       a.dateCapitalisation = c.etudiant.vague.finVague;
+      
   
       if(c.note >= e.seuil) {
           a.resultatQualitatif = "ADM";
