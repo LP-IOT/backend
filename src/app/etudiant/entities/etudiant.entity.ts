@@ -42,11 +42,11 @@ export class Etudiant extends BaseFieldEntity {
   )
   vague: Vague;
 
-  @ManyToOne(
+  @OneToMany(
     () => Admission,
     admission => admission.id
   )
-  admission: Admission;
+  admission: Admission[];
 
   @OneToMany(
     () => Copie,
