@@ -29,6 +29,10 @@ export class EtudiantService {
     return await this.etudiantRepository.findOne({ id });
   }
 
+  async findOneByNumEtu(idEtu: number) {
+    return await this.etudiantRepository.createQueryBuilder("etudiant").where("etudiant.idetudiant = :idEtud").setParameters({idEtud: idEtu}).take(1).getOne();
+  }
+
   async findAll() {
     return await this.etudiantRepository.find();
   }

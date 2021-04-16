@@ -36,7 +36,7 @@ export class CopieService {
     try {
       var copie = new Copie();
       copie.note = note;
-      copie.etudiant = await this.etudiantService.findOne(idEtu);
+      copie.etudiant = await this.etudiantService.findOneByNumEtu(idEtu);
       copie.domaine = await this.domaineService.findOne(idDomaine);
       copie.lot = await this.lotService.findOne(idLot);
       copie.epreuve = await this.epreuveService.findOne(idEpreuve);
