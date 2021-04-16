@@ -1,3 +1,4 @@
+import { Epreuve } from 'src/app/epreuve/entities/epreuve.entity';
 import { Lot } from 'src/app/lot/entities/lot.entity';
 import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 import { BaseFieldEntity } from '../../utils/baseEntity.entity';
@@ -12,5 +13,9 @@ export class Barre extends BaseFieldEntity {
   @Column('decimal',{nullable: false, precision: 5, scale: 2})
   seuil: number;
 
-  
+  @OneToMany(
+    () => Epreuve,
+    epreuve => epreuve.id
+  )
+  epreuve: Epreuve[];
 }
