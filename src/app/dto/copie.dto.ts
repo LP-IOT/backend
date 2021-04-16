@@ -14,6 +14,6 @@ export class CreateCopieDTO {
   idLot: number;
 
   @IsNotEmpty()
-  idEpreuve: number;
+  idEpreuve: number
 
 }

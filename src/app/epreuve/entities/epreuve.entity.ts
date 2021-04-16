@@ -1,3 +1,4 @@
+import { Barre } from 'src/app/barre/entities/barre.entity';
 import { Copie } from 'src/app/copies/entities/copie.entity';
 import { Etudiant } from 'src/app/etudiant/entities/etudiant.entity';
 import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
@@ -23,4 +24,10 @@ export class Epreuve extends BaseFieldEntity {
     copie => copie.id,
   )
   copies: Copie[];
+
+  @ManyToOne(
+    () => Barre,
+    barre => barre.id
+  )
+  barre: Barre;
 }

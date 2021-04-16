@@ -5,6 +5,9 @@ import { BaseFieldEntity } from '../../utils/baseEntity.entity';
 @Entity()
 export class Groupe extends BaseFieldEntity {
     
+    @Column('text') 
+    nom: string;
+    
     @OneToMany(
         () => Etudiant,
         etudiant => etudiant.id,

@@ -15,10 +15,7 @@ export class UpdateEtudiantDTO {
 
   @IsNotEmpty()
   idVague: number;
-  @IsNotEmpty()
-  idAdmission: number;
-  @IsNotEmpty()
-  idCopie: number;
+
 
 
 }

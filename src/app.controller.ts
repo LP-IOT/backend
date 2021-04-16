@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Logger, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Get, HttpStatus, Logger, Patch, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { AppService } from './app.service';
 import { Etudiant } from './app/etudiant/entities/etudiant.entity';
 import { EtudiantService } from './app/etudiant/etudiant.service';
@@ -30,6 +30,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { fileURLToPath } from 'node:url';
 import { CreateCorrecteurDTO } from './app/dto/correcteur.dto';
 import { CreateCopieDTO } from './app/dto/copie.dto';
+import { UpdateEtudiantDTO } from './app/dto/etudiant.dto';
 
 @Controller()
 export class AppController {
@@ -51,9 +52,13 @@ export class AppController {
 
   @Post('import/etudiant')
   @UseInterceptors(FileInterceptor('file'))
-  async importCSVEtudiant(@UploadedFile() file: Express.Multer.File) {
-    console.log(await this.etudiantService.importEtudiant(file));
-    //return await this.etudiantService.importEtudiant();
+  async importCSVEtudiant(@UploadedFile() file: Express.Multer.File): Promise<Boolean> {
+    return await this.etudiantService.importEtudiant(file);
+  }
+
+  @Patch('etudiant')
+  async updateEtudiant(@Body() input:UpdateEtudiantDTO): Promise<Boolean> {
+    return await this.etudiantService.updateEtudiant(input.idEtu, input.idUfr, input.idEpreuve, input.idVague, input.idGroupe);
   }
 
   /** Salle Service Endpoint */
@@ -129,6 +134,9 @@ export class AppController {
   }
   @Post('copie')
   async createCopie(@Body() input: CreateCopieDTO): Promise<Boolean> {
+    if(input.note > 5.0) {
+      return false;
+    }
     return await this.copieService.createCopie(input.note, input.idEtu, input.idDomaine, input.idLot, input.idEpreuve);
   }
 
