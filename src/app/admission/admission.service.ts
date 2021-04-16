@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { BarreService } from '../barre/barre.service';
 import { Copie } from '../copies/entities/copie.entity';
 import { EpreuveService } from '../epreuve/epreuve.service';
+import { VagueService } from '../vague/vague.service';
 import { Admission } from './entities/admission.entity';
 
 
@@ -13,6 +14,8 @@ export class AdmissionService {
   constructor(
     @InjectRepository(Admission)
     private admissionRepository: Repository<Admission>,
+    @Inject(VagueService)
+    private vagueService: VagueService
   ) {}
 
   async findOne(id: number) {

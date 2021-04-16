@@ -18,7 +18,7 @@ export class Admission extends BaseFieldEntity {
 
   @ManyToOne(
     () => Etudiant,
-    etudiant => etudiant.id,
+    etudiant => etudiant.idetudiant,
   )
   etudiants: Etudiant;
 
