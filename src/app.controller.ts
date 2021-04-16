@@ -135,7 +135,7 @@ export class AppController {
   @Post('copie')
   async createCopie(@Body() input: CreateCopieDTO): Promise<Boolean> {
     if(input.note > 5.0) {
-      return false;
+      return false
     }
     return await this.copieService.createCopie(input.note, input.idEtu, input.idDomaine, input.idLot, input.idEpreuve);
   }

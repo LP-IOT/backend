@@ -40,8 +40,8 @@ export class CopieService {
       copie.domaine = await this.domaineService.findOne(idDomaine);
       copie.lot = await this.lotService.findOne(idLot);
       copie.epreuve = await this.epreuveService.findOne(idEpreuve);
-      this.admissionService.checkAdmission(copie);
       this.copieRepository.save(copie);
+      this.admissionService.checkAdmission(copie);
       return true;
     } catch (error) {
       Logger.error(error);
