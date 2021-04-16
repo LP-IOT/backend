@@ -23,10 +23,10 @@ export class Domaine extends BaseFieldEntity {
   )
   copies: Copie[];
 
-  @ManyToOne(
+  @OneToMany(
     () => Admission,
     admission => admission.id
   )
-  admission: Admission;
+  admission: Admission[];
 
 }
