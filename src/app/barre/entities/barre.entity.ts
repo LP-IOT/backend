@@ -9,7 +9,7 @@ export class Barre extends BaseFieldEntity {
   @Column('integer', { nullable: false })
   annee: number;
 
-  @Column({nullable: false})
+  @Column('decimal',{nullable: false, precision: 5, scale: 2})
   seuil: number;
 
   
