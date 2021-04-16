@@ -16,11 +16,11 @@ export class Admission extends BaseFieldEntity {
   @Column({nullable: false})
   dateCapitalisation: Date;
 
-  @OneToMany(
+  @ManyToOne(
     () => Etudiant,
     etudiant => etudiant.id,
   )
-  etudiants: Etudiant[];
+  etudiants: Etudiant;
 
   @ManyToOne(
     () => Domaine,
