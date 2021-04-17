@@ -9,9 +9,6 @@ import { Domaine } from '../domaine/entities/domaine.entity';
 import { Epreuve } from '../epreuve/entities/epreuve.entity';
 import { EpreuveService } from '../epreuve/epreuve.service';
 import { Etudiant } from '../etudiant/entities/etudiant.entity';
-import { EtudiantService } from '../etudiant/etudiant.service';
-import { Lot } from '../lot/entities/lot.entity';
-import { VagueService } from '../vague/vague.service';
 import { Admission } from './entities/admission.entity';
 
 
