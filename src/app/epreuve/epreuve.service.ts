@@ -10,8 +10,11 @@ export class EpreuveService {
     private epreuveRepository: Repository<Epreuve>,
   ) {}
 
-  async findOne(id: number) {
+  async findOne(id: number): Promise<Epreuve> {
     return await this.epreuveRepository.findOne({ id });
+  }
+  async findBarre(id: number) : Promise<Epreuve> {
+    return await this.epreuveRepository.findOne(id, {relations:['barre']})
   }
   async findAll() {
     return await this.epreuveRepository.find();
