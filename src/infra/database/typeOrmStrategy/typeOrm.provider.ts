@@ -5,7 +5,7 @@ import { join } from 'path';
 export const typeOrmStrategyFactory = (configService: ConfigService) =>
   ({
     type: 'mariadb',
-    host: 'backend_db_1',
+    host: 'localhost',
     port: configService.get('DATABASE_PORT'),
     username: "deploy",
     password: "deploy",
